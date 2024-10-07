@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    /* Importing fonts from Google Fonts API */
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Playfair+Display&display=swap');
+
+    * {
+        scroll-behavior: smooth;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Playfair Display', serif;
+    }
+
+    section {
+        padding: 200px;
+    }
+
+    .banner {
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: black;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .banner .welcome {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 730px;
+    }
+
+    .banner h2 {
+        font-size: 3em;
+        font-weight: 500;
+        line-height: 1.5em;
+        color: #fff;
+    }
+
+    .banner h2 span {
+        font-size: 1.5em;
+        font-weight: 700;
+    }
+
+    .banner h3 {
+        font-size: 2em;
+        font-weight: 500;
+        margin-top: 50px;
+        max-width: 690px;
+        color: #fff;
+        text-align: center;
+    }
+
+
+    .button {
+        background: linear-gradient(135deg, #430297, #6b04c3);
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 24px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    }
+
+    .button:hover {
+        background: linear-gradient(135deg, #6b04c3, #430297);
+        color: #500000;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+
+
+    .sticky {
+        background: #ffffff;
+        padding: 20px 120px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 40px 100px;
+        z-index: 1000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: 0.8s;
+        font-size: 16px;
+    }
+
+    .logo {
+        color: #fff;
+        font-size: 21px;
+        text-transform: uppercase;
+        text-decoration: none;
+        font-weight: 700;
+        letter-spacing: 2px;
+    }
+
+    .start {
+        background: #e5e5e5;
+        text-align: center;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+    }
+
+
+    .heading {
+        margin-bottom: 50px;
+        text-align: center;
+    }
+
+
+    .sticky ul li a {
+        color: #430297;
+    }
+
+    .sticky .logo {
+        color: #430297;
+    }
+
+    header ul {
+        position: relative;
+        display: flex;
+    }
+
+    header ul li {
+        position: relative;
+        list-style: none;
+    }
+
+    header ul li a {
+        position: relative;
+        display: inline-block;
+        margin: 0 15px;
+        color: #fff;
+        text-decoration: none;
+    }
+
+
+    .content {
+        flex-direction: column;
+        display: flex;
+        justify-content: space-between;
+        text-align: center;
+    }
+
+
+    .content h3 {
+        font-size: 24px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .imgsp img {
+        width: 25%;
+        max-width: 100%;
+        border-radius: 15px;
+    }
+
+    .introp {
+        display: inline-block;
+        word-wrap: break-word;
+        max-width: 600px;
+        overflow: hidden;
+        padding: 15px;
+        text-align: center;
+        vertical-align: middle;
+        margin-bottom: 35px;
+    }
+
+
+    img {
+        max-width: 100%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 70%;
+    }
+
+    .mainlogo {
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+        align-items: center;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+    }
+
+    #stock-symbol {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    #predict-button {
+        background-color: #333;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+
+
+
+
+    @media (max-width: 650px) {
+        .container {
+            padding: 9px;
+        }
+
+        #stock-symbol {
+            margin-bottom: 9px;
+        }
+
+        #predict-button {
+            padding: 6px 14px;
+        }
+    }
+
+
+
+    @media (max-width: 990px) {
+
+        header,
+        header.sticky {
+            padding: 20px 50px;
+            z-index: 1000;
+            align-items: center;
+        }
+
+        .menu {
+            position: fixed;
+            top: 75px;
+            right: -100%;
+            display: block;
+            padding: 100px 50px;
+            text-align: center;
+            width: 100%;
+            height: 100vh;
+            background: #ededed;
+            transition: 0.5s;
+            z-index: 999;
+            border-top: 1px solid rgba(0, 0, 0, 0.2);
+        }
+
+        .menu.active {
+            right: 0;
+        }
+
+        header ul li a {
+            color: #111;
+            font-size: 24px;
+            margin: 10px;
+        }
+
+        .toggle {
+            transition: 0.75s;
+            width: 40px;
+            height: 40px;
+            background: url(images/menu.png);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 30px;
+            cursor: pointer;
+        }
+
+        .toggle.active {
+            transition: 0.75s;
+            background: url(images/close.png);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 25px;
+            cursor: pointer;
+        }
+
+        header.sticky .toggle {
+            filter: invert(1);
+        }
+
+        .logo {
+            font-size: 15px;
+        }
+
+        .banner {
+            padding: 150px 50px 100px;
+        }
+
+        .banner h2 {
+            font-size: 1.45em;
+        }
+
+        ,
+        banner h3 {
+            font-size: 1em;
+        }
+
+        .button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 15px;
+        }
+
+        .heading h2 {
+            font-size: 25px;
+        }
+    }
+
+</style>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title> Stock Predictor </title>
+    <link rel="stylesheet" href="style.css"> <!-- Link to the CSS file -->
+    <link rel="stylesheet" href="normalize.css"> <!-- Renders all elements more consistently -->
+</head>
+
+<body>
+    <header class="">
+        <a href="#home" class="logo">Stock Predictor</a>
+        <div class="toggle" onclick="toggleMenu();"></div>
+        <ul class="menu">
+            <!-- Menu items -->
+            <li><a href="#" onclick="toggleMenu();">Home</a></li>
+            <li><a href="#start" onclick="toggleMenu();">Start</a></li>
+            <li><a href="#" onclick="toggleMenu();">Markets</a></li>
+            <li><a href="#" onclick="toggleMenu();">Portfolio</a></li>
+            <li><a href="#" onclick="toggleMenu();">Watchlist</a></li>
+            <li><a href="#" onclick="toggleMenu();">More</a></li>
+        </ul>
+    </header>
+    <section class="banner" id="home">
+        <div class="welcome">
+            <h2>Stock Predictor</h2>
+            <main class="mainlogo"><img src="{{ url_for('static', filename='images/aggie.png') }}" alt="Texas A&M University Logo"></main>
+            <h3>A simple stock predictor website using HTML, CSS, and Python.</h3><br>
+            <a href="#start" class="button"> Start </a> <!-- Start button that makes you go down -->
+        </div>
+    </section>
+    <section class="start" id="start">
+        <div class="heading">
+            <h2>How it works</h2>
+        </div>
+        <div class="content">
+            <div class="contentP">
+                <p class="introp">This website is a simple stock market predictor. Users have the capability to input a stock symbol, such as AAPL for Apple, and subsequently trigger a "Predict" button.</p>
+            </div>
+            <div class="container">
+
+                <form action="/process" method="POST">
+                    <label for="stock-symbol">Enter Stock Symbol:</label>
+                    <input type="text" id="stock-symbol" name="input_data" placeholder="e.g., AAPL">
+                    <button id="predict-button" type="submit">Predict</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script type="text/javascript">
+        // JavaScript code to make the header sticky on scroll
+        window.addEventListener('scroll', function() {
+            var header = document.querySelector('header')
+            header.classList.toggle('sticky', window.scrollY > 0);
+        });
+
+        // JavaScript function to toggle the mobile menu
+        function toggleMenu() {
+            var menuToggle = document.querySelector('.toggle');
+            var menu = document.querySelector('.menu');
+            menuToggle.classList.toggle('active');
+            menu.classList.toggle('active');
+        }
+
+    </script>
+</body>
+
+</html>

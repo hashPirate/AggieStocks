@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color: black;">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Stock Data Viewer</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Playfair+Display&display=swap');
+
+        * {
+            scroll-behavior: smooth;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Playfair Display', serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+
+        logo {
+            position: absolute;
+            top: 0;
+            text-align: center;
+            width: 100%;
+            margin-top: 20px;
+            /* Adjust the margin-top to your liking */
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .image-container img {
+            max-width: 60%;
+            margin: 15px;
+        }
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            /* Allow buttons to wrap to the next line if necessary */
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .button {
+            background: linear-gradient(135deg, #430297, #6b04c3);
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px;
+            /* Adjust the margin to your liking */
+            border-radius: 4px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+        }
+
+        .button:hover {
+            background: linear-gradient(135deg, #6b04c3, #430297);
+            color: #500000;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .stock-info {
+            text-align: center;
+            color: white;
+            margin-top: 20px;
+        }
+
+        .stock-info p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .logo {
+            color: #fff;
+            font-size: 21px;
+            text-transform: uppercase;
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <a href="index.html" class="logo">Stock Predictor</a>
+
+    <section>
+        <div class="button-container">
+            <button class="button" onclick="changeImage('1D')">1 Day</button>
+            <button class="button" onclick="changeImage('1W')">1 Week</button>
+            <button class="button" onclick="changeImage('1M')">1 Month</button>
+            <button class="button" onclick="changeImage('Default')">1 year</button>
+        </div>
+
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='images/stockimage_1y.png') }}" alt="Stock Image" id="stockImage">
+            <img src="{{ url_for('static', filename='images/movingaverage.png') }}" alt="Moving Average Image" id="movingAverageImage">
+        </div>
+
+        <div class="stock-info">
+            <p id="stock-info-content"></p>
+        </div>
+        <div class="button-container">
+            <a href="index.html" class="button"> Go back </a>
+        </div>
+    </section>
+
+    <script>
+        function changeImage(buttonType) {
+            var stockImage = document.getElementById('stockImage');
+            var movingAverageImage = document.getElementById('movingAverageImage');
+
+            if (buttonType === '1D') {
+                // Hide one image and change the other
+                stockImage.style.display = 'none';
+                movingAverageImage.src = "{{ url_for('static', filename='images/stockimage_1d.png') }}";
+                movingAverageImage.style.display = 'block';
+            } else if (buttonType === '1W') {
+                // Hide one image and change the other
+                movingAverageImage.style.display = 'none';
+                stockImage.src = "{{ url_for('static', filename='images/stockimage_1w.png') }}";
+                stockImage.style.display = 'block';
+            } else if (buttonType === '1M') {
+                // Hide one image and change the other
+                stockImage.style.display = 'none';
+                movingAverageImage.src = "{{ url_for('static', filename='images/stockimage_1m.png') }}";
+                movingAverageImage.style.display = 'block';
+            } else if (buttonType === 'Default') {
+                // Show the default images
+                stockImage.src = "{{ url_for('static', filename='images/stockimage_1y.png') }}";
+                movingAverageImage.src = "{{ url_for('static', filename='images/movingaverage.png') }}";
+                stockImage.style.display = 'block';
+                movingAverageImage.style.display = 'block';
+            }
+        }
+
+    </script>
+
+<table id="csvTable">
+    <script>
+        // Function to fetch and display CSV data as an HTML table
+        function displayCSV() {
+            fetch('sentiment_analysis.csv')
+                .then(response => response.text())
+                .then(csvData => {
+                    // Split the CSV data into rows
+                    var rows = csvData.split('\n');
+    
+                    // Create the table headers
+                    var table = document.getElementById('csvTable');
+                    var headerRow = document.createElement('tr');
+                    var headers = rows[0].split(',');
+    
+                    for (var i = 0; i < headers.length; i++) {
+                        var th = document.createElement('th');
+                        th.textContent = headers[i];
+                        headerRow.appendChild(th);
+                    }
+    
+                    table.appendChild(headerRow);
+    
+                    // Create the table rows
+                    for (var j = 1; j < rows.length; j++) {
+                        var rowData = rows[j].split(',');
+                        var row = document.createElement('tr');
+    
+                        for (var k = 0; k < rowData.length; k++) {
+                            var cell = document.createElement('td');
+                            cell.textContent = rowData[k];
+                            row.appendChild(cell);
+                        }
+    
+                        table.appendChild(row);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching CSV data:', error);
+                });
+        }
+    
+        // Call the function to display CSV data when the page loads
+        displayCSV();
+    </script>
+    
+</table>
+
+</body>
+
+</html>

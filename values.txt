@@ -1,0 +1,8 @@
+Name: Apple Inc.
+CurrentPrice: 221.69
+StockValuation: Fairly valued
+DayHigh: 225.69
+DayLow: 221.335
+PreviousClose: 226.8
+FiftyTwoWeekHigh: 237.23
+FiftyTwoWeekLow: 164.08
