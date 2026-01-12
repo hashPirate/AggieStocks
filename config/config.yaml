@@ -1,0 +1,23 @@
+# Eon platform configuration
+server:
+  addr: ":8080"
+  read_timeout: 10s
+  write_timeout: 30s
+
+database:
+  url: "${DATABASE_URL}"
+  max_conns: 20
+
+redis:
+  url: "${REDIS_URL}"
+  dedupe_ttl: 30s
+
+processor:
+  consumer_id: "default-consumer"
+  dedupe_window: 24h
+  max_retries: 3
+  retry_backoff: 1s
+
+observability:
+  metrics_addr: ":9090"
+  trace_endpoint: ""
