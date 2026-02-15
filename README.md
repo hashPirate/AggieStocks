@@ -5,7 +5,7 @@
 ## Overview   
 
 
-Eon is my implementation of a distributed payment platform via events designed with the intent of preventing duplicate transactions. I made sure to build metrics and observability tools as well.
+Eon is my implementation of a distributed payment platform via events, designed with the intent of preventing duplicate transactions. I made sure to build metrics and observability tools as well.
 
 I was inspired by watching a video about how Uber handles millions of transactions, and wanted to build a small-scale ledger to do the same.
 
@@ -17,7 +17,7 @@ If you want an in-depth explanation of how it works, I am in the process of writ
 - Dockerized infrastructure makes it easily reproducible
 - Event-driven architecture with smart partitioned ordering for every account
 - Processing is crash-safe by using checkpoints and a durable state
-- PostgresSQL and Redis provide us with a robust deduplication layer
+- PostgreSQL and Redis provide us with a robust deduplication layer
 - A transactional outbox (think email) provides us with guaranteed delivery
 - We can replay events and recovery tools to view failures and fix
 - Observability tools and metrics are also used. ex: uptime stats 
@@ -32,11 +32,11 @@ Language: Go
 
   
 
-Databases: PostgreSQL, Redis (this was my first time using redis)
+Databases: PostgreSQL, Redis (this was my first time using Redis)
 
   
 
-Infrastructure: Docker, Docker Compose used
+Infrastructure: Docker, Docker Compose 
 
   
 
